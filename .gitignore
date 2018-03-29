@@ -1,0 +1,4 @@
+# ignore token file,
+token
+# ignore pycharm stuff
+.idea/
