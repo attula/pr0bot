@@ -1,10 +1,25 @@
 import discord
 import asyncio
+import httplib2
+import json
+import requests
 
 with open('token', 'r') as file:
-    token=file.read().replace('\n', '')
+    token = file.read().replace('\n', '')
 
+link = 'http://img.pr0gramm.com/2018/03/29/5cc77cd582e00c66.png'
 client = discord.Client()
+
+def getJsonObj(link):
+    img_id=link[23:]
+    r = requests.get('http://pr0gramm.com/api/items/get?id=' + str(link)
+    m_json = json.loads(r.content)
+    retunr m_json
+
+def get_raw_link(link):
+    rawlink =m_json['items'][0]['thumb'])
+    return rawlink
+
 
 @client.event
 async def on_ready():
@@ -12,23 +27,16 @@ async def on_ready():
     print(client.user.name)
     print(client.user.id)
     print('------')
-    print(token)
-    
+
+
 @client.event
 async def on_message(message):
     if message.content.startswith('http://pr0gramm.com/'):
-       	message.
+        author = message.author
+        jsonob =  getJsonObj(message.content)
+        rawlink = get_raw_link(message.content)
+        msg = str(author) + ' posts from pr0: ' + str(rawlink)
+        m_msg = await client.send_message(message.channel, msg)
 
-
-
-        tmp = await client.send_message(message.channel, 'Calculating messages...')
-        async for log in client.logs_from(message.channel, limit=100):
-            if log.author == message.author:
-                counter += 1
-
-        await client.edit_message(tmp, 'You have {} messages.'.format(counter))
-    elif message.content.startswith('!sleep'):
-        await asyncio.sleep(5)
-        await client.send_message(message.channel, 'Done sleeping')
 
 client.run(token)
