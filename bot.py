@@ -43,11 +43,6 @@ def get_data(m_json, tags):
         data.tags += ' | '
         i = i + 1
 
-    #data.tags = tags['tags'][0]['tag'] + ' | ' + \
-    #            tags['tags'][1]['tag'] + ' | ' + \
-    #            tags['tags'][2]['tag'] + ' | ' + \
-    #            tags['tags'][3]['tag'] + ' | ' + \
-    #            tags['tags'][4]['tag'] + ' | '
     if m_json['items'][0]['image'].endswith('.mp4'):
         data.rawLink = 'http://thumb.pr0gramm.com/' + m_json['items'][0]['thumb']
     else:
@@ -79,7 +74,7 @@ async def on_message(message):
     if message.content.startswith('http://pr0gramm.com/'):
         try:
             jsonob, tags, desc = get_json(message.content)
-            data = get_data(jsonob,tags)
+            data = get_data(jsonob, tags)
             data.author = message.author
             data.desc = desc
         except:
