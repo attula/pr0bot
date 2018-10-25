@@ -65,6 +65,7 @@ def get_embed(data):
 async def on_ready():
     print('Logged in as')
     print(client.user.name)
+    print('------')
     print(client.user.id)
     print('------')
 
